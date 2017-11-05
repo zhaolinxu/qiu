@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655 -->
+<html ng-app="game" ng-controller="GameController" class="ng-scope">
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <!-- ngIf: isThemeCustom() -->
+    <link ng-if="isThemeCustom()" rel="stylesheet" type="text/css" ng-href="css/theme-night.min.css" class="ng-scope" href="css/theme-night.min.css">
+    <!-- end ngIf: isThemeCustom() -->
+    <link rel="stylesheet" type="text/css" href="css/gameevent.min.css">
+    <script type="text/javascript" async="" src="js/ecommerce.js"></script>
+    <script async="" src="js/analytics.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-animate.min.js"></script>
+    <script type="text/javascript" src="js/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="js/decimal.min.js"></script>
+    <script type="text/javascript" src="js/gameevent.min.js"></script>
+    <meta name="application-name" content="Idle Bouncer Halloween Event"></head>
+  
+  <body ng-mousedown="gameMouseDown($event)" ng-mouseup="gameMouseUp($event)" ng-keypress="gameKeyPress($event)" ng-keydown="gameKeyDown($event)" ng-keyup="gameKeyUp($event)" cz-shortcut-listen="true">
+    <!-- ngIf: !isSteamVersion -->
+    <script ng-if="!isSteamVersion" class="ng-scope">!
+      function(e, t, a, c, n, o, s) {
+        e.GoogleAnalyticsObject = n,
+        e[n] = e[n] ||
+        function() { (e[n].q = e[n].q || []).push(arguments)
+        },
+        e[n].l = 1 * new Date,
+        o = t.createElement(a),
+        s = t.getElementsByTagName(a)[0],
+        o.async = 1,
+        o.src = c,
+        s.parentNode.insertBefore(o, s)
+      } (window, document, "script", "https://www.google-analytics.com/analytics.js", "ga"),
+      ga("create", "UA-12215585-13", "auto"),
+      ga("require", "ecommerce")</script>
+    <!-- end ngIf: !isSteamVersion -->
+    <div id="gamearea">
+      <!-- ngIf: !init -->
+      <script>setTimeout(function() {
+          var e = document.getElementById("initializing");
+          e && (e.innerHTML = 'Something went wrong.<br/>May be you have a slow internet connection.<br/>Or you are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a> to improve your experience.')
+        },
+        1e4)</script>
+      <div class="container-fluid" ng-show="init">
+        <div class="row">
+          <div id="gamearea-left">
+            <div class="panel panel-default bg-halloween" ng-class="getBgClass()">
+              <div class="panel-body field-panel panel-no-top-padding">
+                <div class="img-wrap">
+                  <canvas id="canvas-bottom" class="img-wrapped" width="400" height="566"></canvas>
+                  <div class="spikes spikes-off"></div>
+                  <div>
+                    <span class="glyphicon glyphicon-flash"></span>
+                    <b class="ng-binding">42.17</b>
+                    <small class="ng-binding">+0.2/sec</small></div>
+                  <div class="small ng-scope" ng-controller="IdleEnergyController as ieCtr">
+                    <!-- ngIf: ieCtr.isIdleEnergyAvailable() --></div>
+                  <!-- ngIf: isTutorialStepNameActive('start') -->
+                  <canvas id="canvas" ng-mousedown="doClickCanvas($event)" class="img-wrapped" width="400" height="566"></canvas>
+                </div>
+                <div>
+                  <div class="row">
+                    <div class="col-xs-4 small">Tube info:&nbsp;
+                      <div class="btn-group btn-group-xs" role="group">
+                        <button type="button" class="btn btn-default active" ng-class="{active:getTubeInfoType()==&#39;percent&#39;}" ng-click="setTubeInfoType(&#39;percent&#39;)">%</button>
+                        <button type="button" class="btn btn-default" ng-class="{active:getTubeInfoType()==&#39;epersec&#39;}" ng-click="setTubeInfoType(&#39;epersec&#39;)">
+                          <span class="glyphicon glyphicon-flash"></span>/sec</button>
+                      </div>
+                    </div>
+                    <div class="col-xs-4 small text-center">
+                      <!-- ngIf: isBoostDailyGenerated() --></div>
+                    <div class="col-xs-4 text-right small ng-binding">Scale: ×1.000</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="gamearea-right">
+            <section ng-controller="TabsController as tab" class="ng-scope">
+              <ul class="nav nav-tabs">
+                <li role="presentation" ng-class="{active:tab.isSelected(&#39;Main&#39;)}" class="active" style="">
+                  <a href="http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655#" ng-click="tab.select(&#39;Main&#39;)" m-prevent-default="" title="Upgrades">
+                    <img ng-src="imgs/theme-dark/upgrades.svg" class="tab-img" src="./halloween_files/upgrades.svg">
+                    <span class="tab-name">Upgrades</span></a>
+                </li>
+                <li role="presentation" ng-class="{active:tab.isSelected(&#39;Reset&#39;)}" class="" style="">
+                  <a href="http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655#" ng-click="tab.select(&#39;Reset&#39;)" m-prevent-default="" title="Meta-energy">
+                    <img ng-src="imgs/theme-dark/reset.svg" class="tab-img" src="./halloween_files/reset.svg">
+                    <span class="tab-name">Meta-energy</span></a>
+                </li>
+                <li role="presentation" ng-class="{active:tab.isSelected(&#39;Achievements&#39;)}" class="" style="">
+                  <a href="http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655#" ng-click="tab.select(&#39;Achievements&#39;)" m-prevent-default="" title="Achievements">
+                    <img ng-src="imgs/theme-dark/achievements.svg" class="tab-img" src="./halloween_files/achievements.svg">
+                    <span class="tab-name">Achievements</span>
+                    <span class="glyphicon glyphicon-info-sign" ng-show="isNewAchievementAvailable()" style=""></span>
+                  </a>
+                </li>
+                <li role="presentation" ng-class="{active:tab.isSelected(&#39;Stats&#39;)}" class="" style="">
+                  <a href="http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655#" ng-click="tab.select(&#39;Stats&#39;)" m-prevent-default="" title="Statistics">
+                    <img ng-src="imgs/theme-dark/statistics.svg" class="tab-img" src="./halloween_files/statistics.svg">
+                    <span class="tab-name">Statistics</span></a>
+                </li>
+                <li role="presentation" ng-class="{active:tab.isSelected(&#39;Events&#39;)}" class="" style="">
+                  <a href="http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655#" ng-click="tab.select(&#39;Events&#39;)" m-prevent-default="" title="Events">
+                    <img ng-src="imgsevent/theme-dark/jumpingball.gif" class="tab-img" src="./halloween_files/jumpingball.gif">
+                    <span class="tab-name">&nbsp;Events</span></a>
+                </li>
+                <li role="presentation" ng-class="{active:tab.isSelected(&#39;Settings&#39;)}" class="" style="">
+                  <a href="http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655#" ng-click="tab.select(&#39;Settings&#39;)" m-prevent-default="" title="Settings">
+                    <img ng-src="imgs/theme-dark/settings.svg" class="tab-img" src="./halloween_files/settings.svg">
+                    <span class="tab-name">Settings</span></a>
+                </li>
+                <li role="presentation" ng-class="{active:tab.isSelected(&#39;Premium&#39;)}">
+                  <a href="http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655#" ng-click="tab.select(&#39;Premium&#39;)" m-prevent-default="" title="Shop">
+                    <img ng-src="imgs/theme-dark/premium.svg" class="tab-img" src="./halloween_files/premium.svg">
+                    <span class="tab-name">Shop</span></a>
+                </li>
+              </ul>
+              <!-- ngIf: tab.isSelected('Main') -->
+              <div class="tab-content scroll-section ng-scope" ng-if="tab.isSelected(&#39;Main&#39;)" ng-controller="UpgradeController as upgCtr" style="">
+                <div class="content-block ng-scope" ng-controller="BuyAmountController as buyAmount">
+                  <small>
+                    <!-- ngIf: !buyAmount.isBuyAmountStepPosRight() -->
+                    <b>Buy amount</b>:
+                    <div class="btn-group btn-group-xs" role="group">
+                      <!-- ngRepeat: (itemId, item) in buyAmount.buyAmountRelList -->
+                      <button type="button" class="btn btn-default ng-binding ng-scope active" ng-repeat="(itemId, item) in buyAmount.buyAmountRelList" ng-class="{active:buyAmount.getBuyAmountObject().rel==item.value}" ng-click="buyAmount.setBuyAmountValueRel(item.value)" title="Hotkey: 1">exact</button>
+                      <!-- end ngRepeat: (itemId, item) in buyAmount.buyAmountRelList -->
+                      <button type="button" class="btn btn-default ng-binding ng-scope" ng-repeat="(itemId, item) in buyAmount.buyAmountRelList" ng-class="{active:buyAmount.getBuyAmountObject().rel==item.value}" ng-click="buyAmount.setBuyAmountValueRel(item.value)" title="Hotkey: 2">min</button>
+                      <!-- end ngRepeat: (itemId, item) in buyAmount.buyAmountRelList -->
+                      <button type="button" class="btn btn-default ng-binding ng-scope" ng-repeat="(itemId, item) in buyAmount.buyAmountRelList" ng-class="{active:buyAmount.getBuyAmountObject().rel==item.value}" ng-click="buyAmount.setBuyAmountValueRel(item.value)" title="Hotkey: 3">10%</button>
+                      <!-- end ngRepeat: (itemId, item) in buyAmount.buyAmountRelList -->
+                      <button type="button" class="btn btn-default ng-binding ng-scope" ng-repeat="(itemId, item) in buyAmount.buyAmountRelList" ng-class="{active:buyAmount.getBuyAmountObject().rel==item.value}" ng-click="buyAmount.setBuyAmountValueRel(item.value)" title="Hotkey: 4">50%</button>
+                      <!-- end ngRepeat: (itemId, item) in buyAmount.buyAmountRelList -->
+                      <button type="button" class="btn btn-default ng-binding ng-scope" ng-repeat="(itemId, item) in buyAmount.buyAmountRelList" ng-class="{active:buyAmount.getBuyAmountObject().rel==item.value}" ng-click="buyAmount.setBuyAmountValueRel(item.value)" title="Hotkey: 5">max</button>
+                      <!-- end ngRepeat: (itemId, item) in buyAmount.buyAmountRelList --></div>
+                    <!-- ngIf: buyAmount.isBuyAmountStepPosRight() -->
+                    <span ng-if="buyAmount.isBuyAmountStepPosRight()" class="ng-scope">&nbsp;
+                      <b>Step</b>:
+                      <div class="btn-group btn-group-xs" role="group">
+                        <!-- ngRepeat: (itemId, item) in buyAmount.buyAmountStepList -->
+                        <button type="button" class="btn btn-default ng-binding ng-scope active" ng-repeat="(itemId, item) in buyAmount.buyAmountStepList" ng-class="{active:buyAmount.getBuyAmountObject().step==item}" ng-click="buyAmount.setBuyAmountValueStep(item)" title="Hotkey: 6">1</button>
+                        <!-- end ngRepeat: (itemId, item) in buyAmount.buyAmountStepList -->
+                        <button type="button" class="btn btn-default ng-binding ng-scope" ng-repeat="(itemId, item) in buyAmount.buyAmountStepList" ng-class="{active:buyAmount.getBuyAmountObject().step==item}" ng-click="buyAmount.setBuyAmountValueStep(item)" title="Hotkey: 7">20</button>
+                        <!-- end ngRepeat: (itemId, item) in buyAmount.buyAmountStepList -->
+                        <button type="button" class="btn btn-default ng-binding ng-scope" ng-repeat="(itemId, item) in buyAmount.buyAmountStepList" ng-class="{active:buyAmount.getBuyAmountObject().step==item}" ng-click="buyAmount.setBuyAmountValueStep(item)" title="Hotkey: 8">40</button>
+                        <!-- end ngRepeat: (itemId, item) in buyAmount.buyAmountStepList -->
+                        <button type="button" class="btn btn-default ng-binding ng-scope" ng-repeat="(itemId, item) in buyAmount.buyAmountStepList" ng-class="{active:buyAmount.getBuyAmountObject().step==item}" ng-click="buyAmount.setBuyAmountValueStep(item)" title="Hotkey: 9">160</button>
+                        <!-- end ngRepeat: (itemId, item) in buyAmount.buyAmountStepList -->
+                        <button type="button" class="btn btn-default ng-binding ng-scope" ng-repeat="(itemId, item) in buyAmount.buyAmountStepList" ng-class="{active:buyAmount.getBuyAmountObject().step==item}" ng-click="buyAmount.setBuyAmountValueStep(item)" title="Hotkey: 0">640</button>
+                        <!-- end ngRepeat: (itemId, item) in buyAmount.buyAmountStepList -->
+                        <button type="button" class="btn btn-default ng-binding ng-scope" ng-repeat="(itemId, item) in buyAmount.buyAmountStepList" ng-class="{active:buyAmount.getBuyAmountObject().step==item}" ng-click="buyAmount.setBuyAmountValueStep(item)" title="Hotkey: -">1280</button>
+                        <!-- end ngRepeat: (itemId, item) in buyAmount.buyAmountStepList --></div>
+                    </span>
+                    <!-- end ngIf: buyAmount.isBuyAmountStepPosRight() -->&nbsp;
+                    <a href="http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655#" ng-mouseenter="buyAmount.setHintVisible(true)" ng-mouseleave="buyAmount.setHintVisible(false)" m-prevent-default="">
+                      <span class="glyphicon glyphicon-question-sign"></span></a>
+                  </small>
+                  <div class="popover bottom animate-fade ng-hide" role="tooltip" style="top:80px;left:700px;display:block" ng-show="buyAmount.isHintVisible()">
+                    <div class="arrow" style="bottom:50%;left:87%"></div>
+                    <h3 class="popover-title">Buy amount hotkeys</h3>
+                    <div class="popover-content">
+                      <p>You can use hotkeys 1-0 and "-" to change buy amount and step.</p>
+                      <p>You can swap "Buy amount" and "Step" positions in the Settings tab.</p>
+                    </div>
+                  </div>
+                </div>
+                <section ng-controller="TabsUpgradeController as tabUpg" class="ng-scope">
+                  <ul class="nav nav-tabs">
+                    <li role="presentation" ng-class="{active:tabUpg.isSelected(&#39;Main&#39;)}" class="active">
+                      <a href="http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655#" ng-click="tabUpg.select(&#39;Main&#39;)" m-prevent-default="" title="Energy">
+                        <sup>[q,a]</sup>
+                        <img ng-src="imgs/theme-dark/upgrade_energy.svg" class="tab-img-small" src="./halloween_files/upgrade_energy.svg">
+                        <span class="tab-name">&nbsp;Energy</span>
+                        <!-- ngIf: upgCtr.showUpgradeCntInTab() -->
+                        <span ng-if="upgCtr.showUpgradeCntInTab()" class="badge ng-binding ng-scope">1</span>
+                        <!-- end ngIf: upgCtr.showUpgradeCntInTab() --></a>
+                    </li>
+                    <li role="presentation" ng-class="{active:tabUpg.isSelected(&#39;BallBounce&#39;)}">
+                      <a href="http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655#" ng-click="tabUpg.select(&#39;BallBounce&#39;)" m-prevent-default="" title="Bounce">
+                        <sup>[w,z]</sup>
+                        <img ng-src="imgs/theme-dark/upgrade_bounce.svg" class="tab-img-small" src="./halloween_files/upgrade_bounce.svg">
+                        <span class="tab-name">&nbsp;Bounce</span>
+                        <!-- ngIf: upgCtr.showUpgradeCntInTab() -->
+                        <span ng-if="upgCtr.showUpgradeCntInTab()" class="badge ng-binding ng-scope">1</span>
+                        <!-- end ngIf: upgCtr.showUpgradeCntInTab() --></a>
+                    </li>
+                    <li role="presentation" ng-class="{active:tabUpg.isSelected(&#39;BallSize&#39;)}">
+                      <a href="http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655#" ng-click="tabUpg.select(&#39;BallSize&#39;)" m-prevent-default="" title="Jack-o&#39;-lantern size">
+                        <sup>[e]</sup>
+                        <img ng-src="imgs/theme-dark/upgrade_ball_size.svg" class="tab-img-small" src="./halloween_files/upgrade_ball_size.svg">
+                        <span class="tab-name">&nbsp;Jack-o'-lantern size</span>
+                        <!-- ngIf: upgCtr.showUpgradeCntInTab() -->
+                        <span ng-if="upgCtr.showUpgradeCntInTab()" class="badge ng-binding ng-scope">0</span>
+                        <!-- end ngIf: upgCtr.showUpgradeCntInTab() --></a>
+                    </li>
+                    <li role="presentation" ng-class="{active:tabUpg.isSelected(&#39;TubeHeight&#39;)}">
+                      <a href="http://almostidle.com/our/idle-bouncer/halloween.html?rnd=0.44827325777006655#" ng-click="tabUpg.select(&#39;TubeHeight&#39;)" m-prevent-default="" title="Tube height">
+                        <sup>[r]</sup>
+                        <img ng-src="imgs/theme-dark/upgrade_tube_height.svg" class="tab-img-small" src="./halloween_files/upgrade_tube_height.svg">
+                        <span class="tab-name">&nbsp;Tube height</span>
+                        <!-- ngIf: upgCtr.showUpgradeCntInTab() -->
+                        <span ng-if="upgCtr.showUpgradeCntInTab()" class="badge ng-binding ng-scope">1</span>
+                        <!-- end ngIf: upgCtr.showUpgradeCntInTab() --></a>
+                    </li>
+                    <!-- ngIf: upgCtr.isAbilitiesTabVisible() --></ul>
+                  <!-- ngIf: tabUpg.isSelected('Main') -->
+                  <div class="tab-content ng-scope" ng-if="tabUpg.isSelected(&#39;Main&#39;)">
+                    <table class="table table-condensed table-hover table-td-valign">
+                      <tbody>
+                        <tr>
+                          <th width="20%">Name</th>
+                          <th width="25%" class="text-center">Level</th>
+                          <th width="30%" class="text-center">Value</th>
+                          <th width="25%" class="text-center">Upgrade</th></tr>
+                        <!-- ngRepeat: tube in tubes() track by $index -->
+                        <!-- ngIf: !tube.active && tubes()[$index-1].active -->
+                        <!-- ngIf: tube.active -->
+                        <tr ng-repeat-end="" ng-if="tube.active" ng-style="upgCtr.getUpgradeColorStyle($index)" class="ng-scope">
+                          <td class="upgrade-cell ng-binding">Amplifier 1
+                            <!-- ngIf: tube.improvementLevel> 0 -->
+                            <button ng-show="upgCtr.isTubeImproveButtonVisible($index)" type="button" class="btn btn-success btn-xs btn-block animate-fade ng-binding ng-hide" ng-disabled="!upgCtr.canImproveTube($index)" ng-click="upgCtr.improveTube($index)" ng-bind-html="upgCtr.getImproveText($index)" title="Improvement price: 100.00E63" disabled="disabled">
+                              <span class="glyphicon glyphicon-flash"></span>100.00E63</button></td>
+                          <td class="text-center ng-binding">1
+                            <small class="ng-binding">+1</small>
+                            <br>
+                            <div class="progress ng-isolate-scope" value="upgCtr.getTubeAmplifierLevelsFromPrevSuperUpgrade($index)" max="upgCtr.getTubeAmplifierLevelSuperUpgradeStep($index)">
+                              <div class="progress-bar" ng-class="type &amp;&amp; &#39;progress-bar-&#39; + type" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="20" ng-style="{width: (percent &lt; 100 ? percent : 100) + &#39;%&#39;}" aria-valuetext="5%" aria-labelledby="progressbar" style="width: 5%;"></div>
+                              <div class="progress-text" ng-transclude="">×2</div></div>
+                          </td>
+                          <td class="text-center ng-binding">
+                            <span ng-bind-html="upgCtr.getAmplifierPrefix()" class="ng-binding">×</span>1.00
+                            <br>
+                            <small class="ng-binding">+
+                              <!-- ngIf: !upgCtr.isShowAmplifierValueAsMult() -->1.00</small></td>
+                          <td>
+                            <button type="button" class="btn btn-primary btn-sm btn-block ng-binding" ng-disabled="!upgCtr.isTubeAmplifierUpgradeable($index)" ng-click="upgCtr.upgradeTubeAmplifier($index)">
+                              <span class="glyphicon glyphicon-flash"></span>10.00</button>
+                          </td>
+                        </tr>
+                        <!-- end ngIf: tube.active -->
+                        <!-- end ngRepeat: tube in tubes() track by $index -->
+                        <!-- ngIf: !tube.active && tubes()[$index-1].active -->
+                        <tr ng-repeat-start="tube in tubes() track by $index" ng-if="!tube.active &amp;&amp; tubes()[$index-1].active" class="ng-scope">
+                          <td colspan="4">
+                            <button type="button" class="btn btn-primary btn-sm btn-block ng-binding" ng-disabled="!upgCtr.canBuyTube($index)" ng-click="upgCtr.buyTube($index)" disabled="disabled">Buy tube 2 for
+                              <span class="glyphicon glyphicon-flash"></span>100.00E3</button></td>
+                        </tr>
+                        <!-- end ngIf: !tube.active && tubes()[$index-1].active -->
+                        <!-- ngIf: tube.active -->
+                        <!-- end ngRepeat: tube in tubes() track by $index -->
+                        <!-- ngIf: !tube.active && tubes()[$index-1].active -->
+                        <!-- ngIf: tube.active -->
+                        <!-- end ngRepeat: tube in tubes() track by $index -->
+                        <!-- ngIf: !tube.active && tubes()[$index-1].active -->
+                        <!-- ngIf: tube.active -->
+                        <!-- end ngRepeat: tube in tubes() track by $index -->
+                        <!-- ngIf: !tube.active && tubes()[$index-1].active -->
+                        <!-- ngIf: tube.active -->
+                        <!-- end ngRepeat: tube in tubes() track by $index -->
+                        <!-- ngIf: !tube.active && tubes()[$index-1].active -->
+                        <!-- ngIf: tube.active -->
+                        <!-- end ngRepeat: tube in tubes() track by $index -->
+                        <tr>
+                          <td colspan="4" class="text-center">
+                            <i>Show amplifier's value as</i>&nbsp;
+                            <div class="btn-group btn-group-xs" role="group">
+                              <button type="button" class="btn btn-default active" ng-class="{active:upgCtr.isShowAmplifierValueAsMult()}" ng-click="upgCtr.setShowAmplifierValueAsMult(true)">multiplier</button>
+                              <button type="button" class="btn btn-default" ng-class="{active:!upgCtr.isShowAmplifierValueAsMult()}" ng-click="upgCtr.setShowAmplifierValueAsMult(false)">energy</button></div>
+                            <br>
+                            <small>
+                              <i>Use</i>
+                              <span class="text-primary">[Shift]</span>+
+                              <span class="text-primary">[1]</span>-
+                              <span class="text-primary">[Shift]</span>+
+                              <span class="text-primary">[6]</span>
+                              <i>to buy corresponding upgrades,</i>
+                            </small>
+                            <br>
+                            <small class="animate-fade ng-hide" ng-show="upgCtr.isAbilitiesTabVisible()">
+                              <span class="text-primary">[Shift]</span>+
+                              <span class="text-success">Improve</span>=
+                              <span class="text-warning">Regress</span>
+                              <i>(revert the tube to the previous state before last improve).</i>
+                            </small>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- end ngIf: tabUpg.isSelected('Main') -->
+                  <!-- ngIf: tabUpg.isSelected('BallBounce') -->
+                  <!-- ngIf: tabUpg.isSelected('BallSize') -->
+                  <!-- ngIf: tabUpg.isSelected('TubeHeight') -->
+                  <!-- ngIf: upgCtr.isAbilitiesTabVisible() && tabUpg.isSelected('Abilities') --></section>
+              </div>
+              <!-- end ngIf: tab.isSelected('Main') -->
+              <!-- ngIf: tab.isSelected('Reset') -->
+              <!-- ngIf: tab.isSelected('Achievements') -->
+              <!-- ngIf: tab.isSelected('Stats') -->
+              <!-- ngIf: tab.isSelected('Events') -->
+              <!-- ngIf: tab.isSelected('Settings') -->
+              <!-- ngIf: tab.isSelected('Premium') --></section>
+          </div>
+        </div>
+        <!-- ngIf: isDebugEnabled -->
+        <div class="modal animate-fade ng-scope ng-hide" tabindex="-1" role="dialog" style="display:block" ng-controller="AbilitiesController as abilCtr" ng-show="abilCtr.isTubeAbilityDlgVisible()">
+          <div class="modal-backdrop in" ng-click="abilCtr.hideTubeAbilityDlg()"></div>
+          <!-- ngIf: abilCtr.isTubeAbilityDlgVisible() --></div>
+        <div class="modal animate-fade ng-hide" tabindex="-1" role="dialog" style="display:block" ng-show="isResetSystemDialogVisible()">
+          <div class="modal-backdrop in" ng-click="hideResetSystemDialog()"></div>
+          <!-- ngIf: isResetSystemDialogVisible() --></div>
+        <div class="modal animate-fade ng-hide" tabindex="-1" role="dialog" style="display:block" ng-show="isShowFirstImproveDlg()">
+          <div class="modal-backdrop in" ng-click="hideFirstImproveDlg()"></div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Congratulations!</h4></div>
+              <div class="modal-body">
+                <p>Now you can buy tube and jack-o'-lantern abilities in the
+                  <b>Abilities</b>sub-tab of
+                  <b>Upgrades</b>tab.</p>
+                <p>Also you can change jack-o'-lantern style in the
+                  <b>Settings</b>tab.</p>
+              </div>
+              <div class="modal-footer">
+                <div class="text-center">
+                  <button type="button" class="btn btn-primary" ng-click="hideFirstImproveDlg()">&nbsp;OK&nbsp;</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal animate-fade ng-hide" tabindex="-1" role="dialog" style="display: block;" ng-show="isShowOfflineStats()">
+          <div class="modal-backdrop in" ng-click="hideOfflineStats()"></div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Welcome back
+                  <!-- ngIf: !kongregateInfo().isGuest -->
+                  <!-- ngIf: isSteamInit() && steamName() -->!</h4></div>
+              <div class="modal-body">
+                <p class="ng-binding">You were offline for 00:03:10.</p>
+                <p>You earned
+                  <span class="glyphicon glyphicon-flash"></span>
+                  <span class="num ng-binding">34.42</span></p>
+              </div>
+              <div class="modal-footer">
+                <div class="text-center">
+                  <button type="button" class="btn btn-primary" ng-click="hideOfflineStats()">&nbsp;OK&nbsp;</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal animate-fade ng-hide" tabindex="-1" role="dialog" style="display:block" ng-show="isShowNewBalanceAbilityDlg()">
+          <div class="modal-backdrop in" ng-click="hideNewBalanceAbilityDlg()"></div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Changes</h4></div>
+              <div class="modal-body">
+                <p>We have added special abilities to each tube, available after you improve any tube at least once. Due to abilities we had to modify later-game balance (upgrade costs), but you will only see new balance on each tube after you improve it, or on all tubes after you activate meta-energy (soft reset).</p>
+                <p>We give you 1 free inactive meta-energy for you to be able to soft reset to experience new balance and abilities (be sure to improve all tubes to max level before reseting to get ability points!). But this is not required. You can also just continue playing normally and after improving tubes you'll see new balance and abilities as well.</p>
+                <p>Feel free to post your thoughts on abilities and new balance in the comments! We sure are interested to hear all players thoughts on the subject. Have fun!</p>
+              </div>
+              <div class="modal-footer">
+                <div class="text-center">
+                  <button type="button" class="btn btn-default" ng-click="hideNewBalanceAbilityDlg()">&nbsp;Close&nbsp;</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal animate-fade ng-scope ng-hide" tabindex="-1" role="dialog" style="display:block" ng-controller="BoostDailyController as bstDailyCtr" ng-show="bstDailyCtr.isDlgVisible()">
+          <div class="modal-backdrop in" ng-click="bstDailyCtr.hideDlg()"></div>
+          <!-- ngIf: bstDailyCtr.isDlgVisible() --></div>
+        <div class="modal animate-fade ng-hide" tabindex="-1" role="dialog" style="display:block" ng-show="isBoostDialogVisible()">
+          <div class="modal-backdrop in" ng-click="closeBoostDialog(false)"></div>
+          <!-- ngIf: isBoostDialogVisible() --></div>
+        <div class="modal animate-fade ng-scope ng-hide" tabindex="-1" role="dialog" style="display:block" ng-controller="PremiumController as premCtr" ng-show="premCtr.isPremiumConfirmDialogVisible()">
+          <div class="modal-backdrop in" ng-click="premCtr.hidePremiumConfirmDialog()"></div>
+          <!-- ngIf: premCtr.isPremiumConfirmDialogVisible() --></div>
+        <div class="modal animate-fade ng-scope ng-hide" tabindex="-1" role="dialog" style="display:block" ng-controller="PremiumController as premCtr" ng-show="premCtr.isPremiumDialogVisible()">
+          <div class="modal-backdrop in" ng-click="premCtr.hidePremiumDialog()"></div>
+          <!-- ngIf: premCtr.isPremiumDialogVisible() --></div>
+        <div class="modal animate-fade ng-hide" tabindex="-1" role="dialog" style="display:block" ng-show="isShowIdleModeHelp()">
+          <div class="modal-backdrop in" ng-click="hideIdleModeHelp()"></div>
+          <div class="modal-dialog wide-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Idle mode</h4></div>
+              <div class="modal-body">
+                <i>Idle mode</i>will be available when you buy
+                <i>Idle bonus multiplier</i>meta-energy upgrade or the same name item in the Shop.
+                <br>To activate
+                <i>Idle mode</i>you must not do the following actions during 2 minutes:
+                <br>
+                <ul>
+                  <li>click in the tubes, jack-o'-lanterns or ghosts</li>
+                  <li>upgrade anything</li>
+                  <li>activate meta-energy</li></ul>1 minute before
+                <i>Idle mode</i>activation you'll see
+                <span class="glyphicon glyphicon-hourglass"></span>under the energy bar with time countdown.
+                <br>After
+                <i>Idle mode</i>is activated you'll see
+                <span class="glyphicon glyphicon-time"></span>with
+                <i>Idle mode</i>timer and information about your idle bonus:
+                <br>
+                <p class="text-center">Idle
+                  <span class="glyphicon glyphicon-flash"></span>
+                  <b>10</b>(
+                  <span class="glyphicon glyphicon-flash"></span>100 × 0.10)</p>where
+                <span class="glyphicon glyphicon-flash"></span>
+                <b>10</b>- you current idle bonus,
+                <span class="glyphicon glyphicon-flash"></span>100 - idle energy gathered after
+                <i>Idle mode</i>activation, x0.10 - you current idle energy multiplier.
+                <br>When you do any activity listed above except
+                <i>Activate meta-energy</i>idle bonus will be transferred to the main energy storage in 5 seconds. If you use
+                <i>Activate meta-energy</i>then idle bonus will be added to the main storage immediately before meta-energy activation.
+                <br>There are 2 idle mode parameters:
+                <i>Idle bonus multiplier</i>and
+                <i>Idle multiplier growth time</i>.
+                <br>
+                <i>Idle bonus multiplier</i>increases every hour until idle time reaches
+                <i>Idle multiplier growth time</i>and then it stops growing.
+                <br>For example: you have
+                <i>Idle bonus multiplier</i>0.5 and
+                <i>Idle multiplier growth time</i>3 hours.
+                <br>After 1 hour your
+                <i>Idle bonus multiplier</i>will be 0.5, i.e. +50% to idle energy, 2 hours - add another 50% to previous 50% =&gt; 1.5 * 1.5 - 1 = 1.25 (+125%), 3 hours - add 50% again =&gt; 1.5 * 1.5 * 1.5 - 1 = 2.375 (+237.5%). After 3 hours
+                <i>Idle bonus multiplier</i>will remain constant at 2.375 (+237.5%).
+                <br>If you have gathered 100 idle energy and exit
+                <i>Idle mode</i>(by doing any listed action), then you'll receive 100 * 2.375 = 237.5 bonus energy.</div>
+              <div class="modal-footer">
+                <div class="text-center">
+                  <button type="button" class="btn btn-default" ng-click="hideIdleModeHelp()">&nbsp;Close&nbsp;</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal animate-fade ng-scope ng-hide" tabindex="-1" role="dialog" style="display:block" ng-controller="CloudController as cloudCtr" ng-show="cloudCtr.isCloudDialogVisible()">
+          <div class="modal-backdrop in" ng-click="cloudCtr.hideCloudDialog()"></div>
+          <!-- ngIf: cloudCtr.isCloudDialogVisible() --></div>
+        <div class="modal animate-fade ng-hide" tabindex="-1" role="dialog" style="display:block" ng-show="isShowChangeLog()">
+          <div class="modal-backdrop in" ng-click="hideChangeLog()"></div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Change Log</h4></div>
+              <div class="modal-body">
+                <b>
+                  <u>Version 1.1.0</u>
+                </b>
+                <br>
+                <ul>
+                  <li>added tube's energy proportion value</li>
+                  <li>added option to enable/disable energy text on every bounce</li>
+                  <li>added different figures for each tube improve</li></ul>
+              </div>
+              <div class="modal-footer">
+                <div class="text-center">
+                  <button type="button" class="btn btn-default" ng-click="hideChangeLog()">&nbsp;Close&nbsp;</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal animate-fade ng-scope ng-hide" tabindex="-1" role="dialog" style="display:block" ng-controller="EventsController as evCtr" ng-show="!evCtr.isEventActive()">
+          <div class="modal-backdrop in"></div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title ng-binding">Halloween Event is finished!</h4></div>
+              <div class="modal-body">
+                <p class="ng-binding">Thanks for participating in the Halloween Event!</p>
+                <p>Please return back to the main game now.</p>
+                <p class="ng-binding">We hope you've enjoyed our Halloween Event! Stay tuned for more events.</p>
+                <p>Thanks and good luck.</p>
+              </div>
+              <div class="modal-footer">
+                <div class="text-center">
+                  <button type="button" class="btn btn-info btn-lg" ng-click="evCtr.eventOpen()">Return back to the main game</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="waiting-shadow animate-fade ng-hide" ng-show="isWaitingMsgVisible()">
+          <div class="waiting-text">
+            <div class="progress">
+              <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:100%"></div>
+              <div class="progress-text ng-binding" ng-bind-html="getWaitingMsgText()">Waiting...</div></div>
+            <div class="panel panel-info animate-slide ng-hide" ng-show="getWaitingMsgInfo()">
+              <div class="panel-body">
+                <div ng-bind-html="getWaitingMsgInfo()" class="ng-binding"></div>
+                <br>
+                <div class="text-center">
+                  <button type="button" class="btn btn-default ng-binding" ng-click="hideWaitingMsg()">Continue</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--[if lt IE 9]>
+      <p class=ontop>You are using an
+        <strong>outdated</strong>browser. Please
+        <a href=http://browsehappy.com/ target=_blank>upgrade your browser</a>to improve your experience.</p>
+    <![endif]-->
+    <noscript>&lt;p class=ontop&gt;JavaScript must be enabled to run this game.&lt;/p&gt;</noscript></body>
+
+</html>

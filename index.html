@@ -110,7 +110,7 @@
                     <img ng-src=imgs/{{getThemeImgDir()}}/statistics.svg class=tab-img>
                     <span class=tab-name>Statistics</span></a>
                 </li>
-                <li role=presentation ng-class="{active:tab.isSelected('Events')}">
+                <li role=presentation ng-class="{active:tab.isSelected('Events')}" style="display:none;">
                   <a href="index.html#" ng-click="tab.select('Events')" m-prevent-default title=Events>
                     <img ng-src=imgs/{{getThemeImgDir()}}/halloweenicon.gif class=tab-img>
                     <span class=tab-name>&nbsp;Events</span></a>
